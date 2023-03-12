@@ -108,7 +108,7 @@ let jaexiste;
         return res.json(uniqueDB)
     })
 
-    Routes.delete('Admin/Deleteall/Person',async (req, res) => {
+    Routes.delete('/Admin/Deleteall/Person',async (req, res) => {
         try {
             await People.deleteMany()
             res.status(200).json({message: 'Tudo deletado.'})
