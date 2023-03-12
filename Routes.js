@@ -76,7 +76,7 @@ let jaexiste;
         const Reply = await Comentary.find()
         const {ComentID, Name, Text, Data, isReply, Replyfor, Ref} = req.body
         
-        if (!Name || !Text || !Data || !ComentID && !ComentID !== 0) {
+        if (!Name || !Text || !ComentID && !ComentID !== 0) {
             console.log(!!Name, !!Text, !!Data, !!ComentID)
             return res.status(202).json({error: req.body})
         }
@@ -106,6 +106,15 @@ let jaexiste;
         coments.forEach(item => db.push(item))
         const uniqueDB = [... new Set(db.map(item => JSON.stringify(item)))].map(item => JSON.parse(item))
         return res.json(uniqueDB)
+    })
+
+    Routes.delete('Admin/Deleteall/Person',async (req, res) => {
+        try {
+            await People.deleteMany()
+            res.status(200).json({message: 'Tudo deletado.'})
+        } catch (error) {
+            res.status(404).json({error: error})  
+        }
     })
 
     module.exports = Routes
